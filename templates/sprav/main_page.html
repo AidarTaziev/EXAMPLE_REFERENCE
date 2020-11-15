@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, user-scalable=0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,400i,500,500i,700,900" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static '/styles/css/main_page_styles/main.css' %}">
+    <title>Справочник</title>
+  </head>
+<body>
+  <!-- preload screen -->
+  <div class="preload-wrap">
+    <div class="hover"></div>
+    <div class="preload-content">
+      <img src="{% static 'images/logo.png' %}" >
+      <svg class="spinner" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="1" stroke-miterlimit="10"></circle>
+      </svg>
+    </div>
+  </div>
+  <!-- preload screen end -->
+  {% include 'header.html' %}
+  <header>
+    <div class="left-side">
+      <div class="logo">
+        <img src="{% static 'images/logotype.png' %}" alt="">
+        <img src="{% static 'images/mob-logo.png' %}" class="mobile-logo">
+      </div>
+      <div class="features-column">
+          <div class="features-item">
+            <img src="{% static 'images/secure.png' %}" width="32px">
+            <h3>Надежность</h3>
+            <span>Вся информация собрана нашим технологом лично и соответствует действительности</span>
+          </div>
+          <div class="features-item">
+            <img src="{% static 'images/speed.png' %}" alt="" width="32px">
+            <h3>Скорость</h3>
+            <span>Моментальное получение всей информации о полимере и его аналогах</span>
+          </div>
+          <div class="features-item">
+            <img src="{% static 'images/usability.png' %}" alt="" width="32px">
+            <h3>Удобство</h3>
+            <span>Всё делается за несколько кликов, не нужно связываться с менеджером</span>
+          </div>
+<!--           <div class="features-item">
+            <img src="{% static 'images/sup.png' %}" alt="" width="32px">
+            <h3>Поддержка</h3>
+            <span>Постоянное обновление функциональности и своевременное устранение ошибок</span>
+          </div> -->
+<!--               <div class="features-item">
+            <img src="{% static 'images/sale.png' %}" alt="" width="32px">
+            <h3>Низкие цены</h3>
+            <span>Начальная цена в торговых сессиях гораздо ниже рыночной</span>
+          </div> -->
+          <div class="features-item">
+            <img src="{% static 'images/time.png' %}" alt="" width="32px">
+            <h3>24/7</h3>
+            <span>Сервис работает 24 часа в сутки, 7 дней в неделю</span>
+          </div>
+      </div>
+    </div>
+    <div class="right-side">
+      <div class="hover-wrap">
+        <!-- <img src="{% static 'images/header-1.png' %}" class="hover-img"> -->
+        <div class="hover"></div>
+      </div>
+      <h1>Справочник </h1>
+        <h3 class="ruLang">Available only in Russian </h3>
+      <div class="content-wrap">
+        <form class="filter">
+            <label class="filter-item">
+                <span>Марка</span>
+                <input type="text" name="shortcode" id="shortcode">
+            </label>
+<!--             <label class="filter-item">
+                <span>Тип</span>
+                <select name="type" id="type">
+                    <option selected>Любой</option>
+                    {% for element in polymers_types %}
+                        <option value="{{element.id}}">{{element.name}}</option>
+                    {% endfor %}
+                </select>
+            </label> -->
+            <label class="filter-item">
+                <div class="label-title"><span>Тип</span> <span class="options-count">0</span></div>
+                <div class="multi-select">
+                  <input type="text" name="type" id="type" class="select-activator" autocomplete="off">
+                  <span class="multi-list-open">&#9001;</span>
+                  <div class="hidden-list">
+                    <span>Любой</span>
+                    {% for element in polymers_types %}
+                        <span data-value="{{element.id}}" class="mutli-list-item">{{element.name}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+            </label>
+            <label class="filter-item inputs-row">
+                <span>ПТР</span>
+                <input type="number" step="0.01" name="ptr_left" id="ptr_left" placeholder="Значение от" class="before">
+                <input type="number" step="0.01" name="ptr_right" id="ptr_right" placeholder="Значение до" class="after">
+            </label>
+            <label class="filter-item inputs-row">
+                <span>Плотность</span>
+                <input type="number" step="0.0001" name="density_left" id="density_left" placeholder="Значение от" class="before">
+                <input type="number" step="0.0001" name="density_right" id="density_right" placeholder="Значение до" class="after">
+            </label>
+            <label class="filter-item inputs-row">
+                <span>Температура Вика</span>
+                <input type="number" name="t_vika_left" id="t_vika_left" placeholder="Значение от" class="before">          
+                <input type="number" name="t_vika_right" id="t_vika_right" placeholder="Значение до" class="after">
+            </label>
+            <label class="filter-item">
+                <div class="label-title"><span>Подтип</span> <span class="options-count">0</span></div>
+                <div class="multi-select">
+                  <input type="text" name="subtype" id="subtype" class="select-activator" autocomplete="off">
+                  <span class="multi-list-open">&#9001;</span>
+                  <div class="hidden-list">
+                    <span>Любой</span>
+                    {% for element in polymers_subtypes %}
+                        <span data-value="{{element.id}}"  data-parent="{{element.type_id}}" class="mutli-list-item">{{element.name}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+            </label>
+<!--             <label class="filter-item">
+                <span>Подтип</span>
+                <select name="subtype" id="subtype">
+                    <option selected >Любой</option>
+                    <optgroup>
+                      {% for element in polymers_subtypes %}
+                          <option value="{{element.id}}">{{element.name}}</option>
+                      {% endfor %}
+                    </optgroup>
+                </select>
+            </label> -->
+<!--             <label class="filter-item">
+                <span>Область применения</span>
+                <select name="application" id="application" multiple="multiple">
+                  <optgroup label="">
+                    <option selected >Любой</option>
+                    {% for element in applications %}
+                        <option value="{{element.id}}">{{element.name}}</option>
+                    {% endfor %}
+                  </optgroup>
+                </select>
+            </label> -->
+            <label class="filter-item">
+              <div class="label-title"><span>Категории применения</span> <span class="options-count">0</span></div>
+              <div class="multi-select">
+                <input type="text" name="application_category" id="application_category" class="select-activator" autocomplete="off">
+                <span class="multi-list-open">&#9001;</span>
+                <div class="hidden-list">
+                  <span>Любой</span>
+                  {% for element in application_categorys %}
+                      <span data-value="{{element.id}}" class="mutli-list-item">{{element.name}}</span>
+                  {% endfor %}
+                </div>
+              </div>
+          </label>
+            <label class="filter-item">
+                <div class="label-title"><span>Область применения</span> <span class="options-count">0</span></div>
+                <div class="multi-select">
+                  <input type="text" name="application" id="application" class="select-activator" autocomplete="off">
+                  <span class="multi-list-open">&#9001;</span>
+                  <div class="hidden-list">
+                    <span>Любой</span>
+                    {% for element in applications %}
+                        <span data-value="{{element.id}}" class="mutli-list-item">{{element.name}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+            </label>
+<!--             <label class="filter-item">
+                <span>Сополимер</span>
+                <select name="copolymer" id="copolymer">
+                    <option selected>Любой</option>
+                    {% for element in copolymers %}
+                        <option value="{{element.id}}">{{element.name}}</option>
+                    {% endfor %}
+                </select>
+            </label> -->
+            <label class="filter-item">
+                <div class="label-title"><span>Сополимер</span> <span class="options-count">0</span></div>
+                <div class="multi-select">
+                  <input type="text" name="copolymer" id="copolymer" class="select-activator" autocomplete="off">
+                  <span class="multi-list-open">&#9001;</span>
+                  <div class="hidden-list">
+                    <span>Любой</span>
+                    {% for element in copolymers %}
+                        <span data-value="{{element.id}}" class="mutli-list-item">{{element.name}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+            </label>            
+<!--             <label class="filter-item">
+                <span>Цвет</span>
+                <select name="color" id="color">
+                    <option selected>Любой</option>
+                    {% for element in colors %}
+                        <option value="{{element.id}}">{{element.name}}</option>
+                    {% endfor %}
+                </select>
+            </label> -->
+            <label class="filter-item">
+                <div class="label-title"><span>Цвет</span> <span class="options-count">0</span></div>
+                <div class="multi-select">
+                  <input type="text" name="color" id="color" class="select-activator" autocomplete="off">
+                  <span class="multi-list-open">&#9001;</span>
+                  <div class="hidden-list">
+                    <span>Любой</span>
+                    {% for element in colors %}
+                        <span data-value="{{element.id}}" class="mutli-list-item">{{element.name}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+            </label>            
+<!--             <label class="filter-item">
+                <span>Производитель</span>
+                <select name="plant" id="plant">
+                    <option selected>Любой</option>
+                    {% for element in plants %}
+                        <option value="{{element.id}}">{{element.name}}</option>
+                    {% endfor %}
+                </select>
+            </label> -->
+            <label class="filter-item">
+                <div class="label-title"><span>Производитель</span> <span class="options-count">0</span></div>
+                <div class="multi-select">
+                  <input type="text" name="plant" id="plant" class="select-activator" autocomplete="off">
+                  <span class="multi-list-open">&#9001;</span>
+                  <div class="hidden-list">
+                    <span>Любой</span>
+                    {% for element in plants %}
+                        <span data-value="{{element.id}}" class="mutli-list-item">{{element.name}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+            </label>
+<!--             <label class="filter-item">
+                <span>Метод получения</span>
+                <select name="obtaining_method" id="obtaining_method">
+                    <option selected>Любой</option>
+                    {% for element in obtaining_methods %}
+                        <option value="{{element.id}}">{{element.name}}</option>
+                    {% endfor %}
+                </select>
+            </label> -->
+            <label class="filter-item">
+                <div class="label-title"><span>Метод получения</span> <span class="options-count">0</span></div>
+                <div class="multi-select">
+                  <input type="text" name="obtaining_method" id="obtaining_method" class="select-activator" autocomplete="off">
+                  <span class="multi-list-open">&#9001;</span>
+                  <div class="hidden-list">
+                    <span>Любой</span>
+                    {% for element in obtaining_methods %}
+                        <span data-value="{{element.id}}" class="mutli-list-item">{{element.name}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+            </label>
+<!--             <label class="filter-item">
+                <span>Метод переработки</span>
+                <select name="processing_method" id="processing_method">
+                    <option selected>Любой</option>
+                    {% for element in processing_methods %}
+                        <option value="{{element.id}}">{{element.name}}</option>
+                    {% endfor %}
+                </select>
+            </label> -->
+            <label class="filter-item">
+                <div class="label-title"><span>Метод переработки</span> <span class="options-count">0</span></div>
+                <div class="multi-select">
+                  <input type="text" name="processing_method" id="processing_method" class="select-activator" autocomplete="off">
+                  <span class="multi-list-open">&#9001;</span>
+                  <div class="hidden-list">
+                    <span>Любой</span>
+                    {% for element in processing_methods %}
+                        <span data-value="{{element.id}}" class="mutli-list-item">{{element.name}}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+            </label>
+            <div class="btn-wrap">
+                <span class="clear">Сбросить x</span>
+                <button type="submit" name="button" id="button">Найти</button>
+            </div>
+        </form>
+        <div class="blocks-wrap">
+          {% if errors_list %}
+            {% for error in errors_list %}
+                <h1 class="title-error">{{ error }}</h1>
+            {% endfor %}
+              <!-- <h1 class="title-error">{{ errors }}</h1> -->
+          {% else %}
+            {%  if polymers  %}
+                {% for polymer in polymers %}
+                    {% include 'sprav/polymer/polymer_post.html' %}
+                {% endfor %}
+            {% else %}
+                <h1 class="title-error">Ничего не найдено</h1>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="alert-wrap" id="agreement-wrap">
+      <div class="hover"></div>
+      <div class="alert-frame">
+          <h2></h2>
+          <button id="agreement_close">OK</button>
+      </div>
+    </div>
+  </header>
+  <script type="text/javascript" src="{% static 'js/main-files/main-ajax.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/main-files/main-functions.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/main-page/main.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

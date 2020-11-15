@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="main-row" id="{{ id }}">
+        <div class="prop-list">
+            <h2>Свойства полимера</h2>
+            <div class="row">
+                <span>Марка:</span>
+                <span>{{ shortcode }}</span>
+            </div>
+            <div class="row">
+                <span>Тип:</span>
+                <span>{{ subtype__type__name }}</span>
+            </div>
+            <div class="row">
+                <span>Подтип:</span>
+                <span>{{ subtype__name }}</span>
+            </div>
+            {% if ptr %}
+                <div class="row">
+                    <span>ПТР:</span>
+                    <span>{{ ptr }}</span>
+                </div>
+            {% endif %}
+            {% if ptr_load %}
+                <div class="row">
+                    <span>ПТР нагрузка:</span>
+                    <span>{{ ptr_load }}</span>
+                </div>
+            {% endif %}
+            {% if ptr_temperature %}
+                <div class="row">
+                    <span>ПТР температура:</span>
+                    <span>{{ ptr_temperature }}</span>
+                </div>
+            {% endif %}
+            {% if density %}
+                <div class="row">
+                    <span>Плотность:</span>
+                    <span>{{ density }}</span>
+                </div>
+            {% endif %}
+            {% if copolymer__name %}
+                <div class="row">
+                    <span>Сополимер:</span>
+                    <span>{{ copolymer__name }}</span>
+                </div>
+            {% endif %}
+            <div class="row">
+                <span>Цвет:</span>
+                <span>{{ color__name }}</span>
+            </div>
+            {% if relation  %}
+                <div class="row">
+                    <span>Отношение сополимеров:</span>
+                    <span>{{ relation }}</span>
+                </div>
+            {% endif %}
+            {% if copolymer_content %}
+                <div class="row">
+                    <span>Содержание сополимеров:</span>
+                    <span>{{ copolymer_content }}</span>
+                </div>
+            {% endif %}
+            {% if diene_content %}
+                <div class="row">
+                    <span>Содержание этилиденнорборнена:</span>
+                    <span>{{ diene_content }}</span>
+                </div>
+            {% endif %}
+            {% if ethylene_content %}
+                <div class="row">
+                    <span>Содержание этилена:</span>
+                    <span>{{ ethylene_content }}</span>
+                </div>
+            {% endif %}
+            {% if t_vika %}
+                <div class="row">
+                    <span>Температура Вика:</span>
+                    <span>{{ t_vika }}</span>
+                </div>
+            {% endif %}
+            {% if viscosity_Mooney %}
+                <div class="row">
+                    <span>Вязкость по Муни:</span>
+                    <span>{{ viscosity_Mooney }}</span>
+                </div>
+            {% endif %}
+
+            {#            {% if application_category %}#}
+            {#                <div class="row">#}
+            {#                    <span>Категория применения:</span>#}
+            {#                    <span>{{ application_category}}</span>#}
+            {#                </div>#}
+            {#            {% endif %}#}
+            {% if application %}
+                <div class="row">
+                    <span>Область применения:</span>
+                    <span>{{ application }}</span>
+                </div>
+            {% endif %}
+            {% if plant %}
+                <div class="row">
+                    <span>Производители:</span>
+                    <span>{{ plant }}</span>
+                </div>
+            {% endif %}
+            {% if obt_method %}
+                <div class="row">
+                    <span>Методы получения:</span>
+                    <span>{{ obt_method }}</span>
+                </div>
+            {% endif %}
+            {% if proc_method %}
+                <div class="row">
+                    <span>Методы переработки:</span>
+                    <span>{{ proc_method }}</span>
+                </div>
+            {% endif %}
+
+
+        </div>
+        <div class="btn-wrap">
+            <div class="price-block">
+            <span>
+                Чтобы узнать цены, пожалуйста оставьте заявку
+            </span>
+                <a href="order/{{ id }}">
+                    <button type="button" name="button">Оставить заявку</button>
+                </a>
+            </div>
+            {#            {% if analogs is not None %}#}
+            <button type="button" class="analog-btn">ПОКАЗАТЬ АНАЛОГИ</button>
+            <div class="analog-block">
+                <table>
+                    {#                        <tr>#}
+                    {#                            <td>Марка</td>#}
+                    {#                            <td>Подтип</td>#}
+                    {#                            <td>Производитель</td>#}
+                    {#                            <td>ПТР</td>#}
+                    {#                            <td>Плотность</td>#}
+                    {#                        </tr>#}
+                    {#                         {% for analog in analogs %}#}
+                    {#                            <tr>#}
+                    {#                                <td>{{ analog.shortcode }}</td>#}
+                    {#                                <td>{{ analog.subtype__name }}</td>#}
+                    {#                                <td>{{ analog.plants__name }}</td>#}
+                    {#                                <td>{{ analog.ptr }}</td>#}
+                    {#                                <td>{{ analog.density }}</td>#}
+                    {#                            </tr>#}
+                    {#                        {% endfor %} #}
+                </table>
+            </div>
+            {#            {% endif %}#}
+        </div>
+    </div>
+
+{% endblock content %}

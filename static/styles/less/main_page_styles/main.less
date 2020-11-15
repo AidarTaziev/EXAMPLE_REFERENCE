@@ -1,0 +1,861 @@
+@import "../base.less";
+@import "keyframes.less";
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-size: 14px;
+	overflow-y: hidden;
+}
+
+& .menu-wrap {
+	.flex(row, flex-end, center);
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	width: 100%;
+
+	& .selfinfo-wrap {
+		.flex(column, flex-start, center);
+		position: relative;
+		margin-left: 25px;
+
+		& .img-wrap {
+			.flex(row, center, center);
+			width: 25px;
+			height: 25px;
+			& img {
+				width: 25px;
+			}
+		}
+
+		& .hidden-menu {
+			display: none;
+		}
+
+		& img, svg { cursor: pointer; }
+		& .selfinfo-frame {
+			position: absolute;
+			left: -235px;
+			top: 180%;
+
+			& .name-row {
+				display: flex;
+			    width: 100%;
+			    padding: 5px 10%;
+			    font-size: 1.2em;
+			    font-weight: 500;
+			    color: @profile-wrap;
+			    & span:last-child {
+			    	margin: 0 5px;
+			    }
+			}
+			& .bordered {
+				border-bottom: 1px solid #eee;
+				padding-bottom: 10px;
+			}
+		}
+		& .sberbank-list {
+			min-width: 320px;
+			left: -285px;
+
+			& .name-row {
+				padding: 5px 5%;
+			}
+		}
+		& .modal-wrap {
+			position: fixed;
+			.flex(row, center, flex-start);
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100vh;
+			z-index: -1;
+			visibility: hidden;
+			& .hover {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				z-index: 0;
+				background: #000;
+				opacity: .8;
+			}
+			& .modal-frame {
+				.flex(column, flex-start, center);
+				position: fixed;
+				top: -800px;
+				border-radius: 2px;
+				background: #fff;
+			    width: 30%;
+			    min-width: 300px;
+			    padding: 20px;
+			    box-sizing: border-box;
+			    z-index: 11;
+			    box-shadow: 0 0 20px 2px rgba(255,255,255,0.2);
+
+			    transition: all .3s linear;
+
+				& h2 {
+					font-weight: 400;
+					width: 100%;
+					text-align: center;
+				}
+
+				& ul {
+					.flex(column, flex-start, center);
+					width: 80%;
+					list-style: none;
+					margin-top: 10px;
+					color: #1B2631;
+					background: #fafafa;
+					padding-top: 10px;
+					& li {
+						.flex(column, space-between, center);
+						padding: 5px 10px;
+						margin: 5px 0;
+						width: 100%;
+						border-bottom: 1px solid #eee;
+						& span {
+							margin: 2.5px 0;
+						}
+					}
+					& li:last-child {
+						border: none;
+					}
+				}
+
+				& .close-modal {
+					position: absolute;
+					right: 15px;
+					top: 0px;
+					cursor: pointer;
+					font-size: 2em;
+				}
+
+				& form {
+					.flex(column, flex-start, center);
+					width: 100%;
+					margin: 10px 0;
+					& label {
+						.flex(column, flex-start, center);
+						width: 100%;
+						margin: 10px 0;
+						& span {
+							margin-bottom: 10px;
+						}
+						& input, select {
+							.input();
+							padding: 0 20px;
+							height: 45px;
+							width: 80%;
+							box-sizing: border-box;
+							font-size: 1em;
+						}
+					}
+					& button {
+						display: flex;
+						align-items: center;
+						.button(5px, #0EB757, #fff, 1);
+						font-size: 14pt;
+						font-weight: 400;
+						width: auto;
+						border: none;
+						margin: 10px auto;
+						&:hover {
+							background: lighten(#0EB757, 5%);
+							color: #fff;
+						}
+						&:active {
+							background: darken(#0EB757, 5%);
+							transform: none;
+						}
+						& svg {
+							margin: 0 5px;
+						}
+					}
+				}
+			}
+		}
+
+		& .active-wrap {
+			z-index: 100;
+			visibility: visible;
+			& .modal-frame {
+				top: 50px;
+			}
+		}
+	}
+}
+
+.preload-wrap {
+	.flex(column, center, center);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	.hover {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		background: @green-color;
+	}
+	.preload-content {
+		.flex(column, space-around, center);
+		z-index: 100;
+		height: 10vh;
+		img {
+			width: 100px;
+		}
+		& span {
+			color: #fff;
+			opacity: .8;
+			letter-spacing: 2.5px;
+			padding: 20px 0 0 0;
+		}
+		& .spinner {
+			height: 200px;
+		    width: 200px;
+		    animation: rotate 2s linear infinite;
+		    transform-origin: center center;
+		    position: absolute;
+		    top: 0;
+		    bottom: 0;
+		    left: 0;
+		    right: 0;
+		    margin: auto;
+		    & .path {
+		    	stroke-dasharray: 1, 200;
+				stroke-dashoffset: 0;
+				animation: dash 1.5s ease-in-out infinite;
+				stroke-linecap: round;
+				stroke: #000;
+		    }
+		}
+	}
+}
+
+header {
+	.flex(row, flex-start, flex-start);
+	display: none;
+	width: 100%;
+	height: 100vh;
+	& .left-side {
+		.flex(column, flex-start, flex-start);
+		width: 250px;
+		height: 100%;
+		background: #fff;
+		box-shadow: 2px 2px 14px 2px rgba(0,0,0,.3);
+		z-index: 1;
+		& .logo {
+			position: relative;
+			width: 100%;
+			min-height: 250px;
+			& img {
+				position: absolute;
+			    top: -150px;
+			    left: -65px;
+			    width: 350px;
+			}
+
+			& .mobile-logo {
+				display: none;
+			}
+		}
+		& .features-column {
+			.flex(column, space-between, center);
+			position: relative;
+			overflow-y: scroll;
+			width: 100%;
+			height: 100%;
+			& .features-item {
+				.flex(column, flex-start, center);
+				width: 70%;
+				min-height: 100px;
+				margin: 25px 0;
+				& h3 {
+					font-weight: 400;
+					font-size: 1.25em;
+					padding: 5px 0;
+				}
+				& span {
+					text-align: center;
+					color: #aeabab;
+					font-size: .8em;
+				}
+			}
+		}
+	}
+	& .right-side {
+		.flex(column, flex-start, center);
+		position: relative;
+		width: 100%;
+		height: 100%;
+		padding-right: 30px;
+		padding-top: 40px;
+		z-index: 0;
+		overflow: hidden;
+		& .hover-wrap {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			z-index: -1;
+		}
+		& .hover, .hover-img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: @green-color;
+		}
+		& .hover-img {
+			width: 110%;
+			height: 110%;
+			transition: all .3s linear;
+			animation: paralax 4s infinite linear;
+		}
+		& h1 {
+			position: absolute;
+			top: 100px;
+			font-size: 2em;
+		    font-weight: 300;
+		    color: #fff;
+		    padding-bottom: 50px;
+		}
+<<<<<<< HEAD
+		& .ruLang {
+			display: none;
+			position: absolute;
+			top: 150px;
+			font-weight: 300;
+			color: #fff;
+			padding-bottom: 50px;
+=======
+		& .title-error {
+			position: static;
+>>>>>>> release/rel_new_search
+		}
+		& .content-wrap {
+			.flex(column, flex-start, center);
+			width: 100%;
+			position: relative;
+			overflow-y: scroll;
+			height: 85%;
+			margin-top: 150px;
+			padding: 20px 0;
+			& .filter {
+				.flex(row, space-around, center);
+				flex-wrap: wrap;
+				width: 65%;
+				border-radius: 5px;
+				box-shadow: 0 3px 14px 0 rgba(0,0,0,.5);
+				background: #fff;
+
+				& .filter-item {
+				  .flex(column, flex-start, flex-start);
+				  flex-basis: 300px;
+				  padding: 1.5%;
+
+				  & span, .label-title {
+				    font-size: 1rem;
+				    padding: 5px 0;
+				    color: #000;
+				    text-align: left;
+
+				    & .options-count {
+				  		background: @green-color;
+				  		color: #fff;
+				  		border-radius: 100px;
+				  		padding: 5px 7.5px;
+				  		font-size: .6em;
+				  		margin-left: 5px;
+				  		font-weight: bold;
+				  		width: 20.52px;
+				  	}
+				  }
+
+				  & .label-title {
+				  	.flex(row, flex-start, center);
+				  }
+
+				  & input, select, textarea{
+				    .input();
+				    padding: 10px 2.5%;
+				    font-size: 1em;
+				    width: 95%;
+				  }
+
+				  & select {
+				    width: 100%;
+				    height: 38px;
+				    color: darken(#dedede, 50%);
+
+				    & option {
+				      background-color: #fff;
+				      top: 0;
+				      color: darken(#dedede, 50%);
+				    }
+				  }
+				  & .multi-select {
+				  	position: relative;
+				  	width: 100%;
+
+				  	& .multi-list-open {
+				  		position: absolute;
+				  		top: 7px;
+				  		right: 25px;
+				  		width: auto;
+				  		font-size: 1em;
+				  		cursor: pointer;
+				  		transform: rotate(-90deg);
+				  		transition: all .3s linear;
+						border: 1px solid transparent;
+						border-radius: 100px;
+						user-select: none;
+				  		&:hover {
+				  			color: @green-color;
+				  		}
+				  	}
+
+				  	& .multi-list-close {
+				  		transform: rotate(90deg);
+				  		top: 0px;
+				  	}
+
+				  	& .hidden-list {
+				  		position: absolute;
+				  		.flex(column, flex-start, flex-start);
+				  		display: none;
+				  		top: 38px;
+				  		left: 0;
+				  		height: 300px;
+				  		width: 95%;
+				  		background: #fff;
+				  		border: 1px solid @green-color;
+				  		overflow-y: scroll;
+				  		z-index: 50;
+
+				  		& span {
+				  			padding: 5px;
+				  			border-bottom: 1px solid #ccc;
+				  			width: 100%;
+				  			cursor: pointer;
+				  			transition: all .3s linear;
+				  			&:hover {
+				  				border-color: @green-color;
+				  			}
+				  		}
+
+				  		& .active-list-item {
+				  			background-color: @green-color;
+				  			color: #fff;
+				  			border-color: #fff;
+				  		}
+				  	}
+				  }
+				}
+
+				& .inputs-row {
+					.flex(row, space-between, center);
+					flex-wrap: wrap;
+
+					& span {
+						width: 100%;
+					}
+
+					& input {
+						position: relative;
+						width: 45%;
+						min-height: 38px;
+					}
+
+					& .input-error {
+						border: 1px solid @alert-color;
+						&:hover {
+							border-color: @alert-color;
+						}
+						&:focus {
+							border-color: @alert-color;
+						}
+						&::after {
+							content: 'Значение не валидно';
+							position: absolute;
+							top: 100%;
+							left: 0;
+							color: @alert-color;
+						}
+					}
+				}
+
+				& .btn-wrap {
+				  .flex(row, flex-end, center);
+				  width: 94%;
+				  padding: 3%;
+
+				  & span {
+				    font-size: 1rem;
+				    cursor: pointer;
+				    color: #a7a4a4;
+				    padding: 0;
+				  }
+
+				  & button, input {
+				    .button(5px, @green-color, #fff, 12);
+				    margin-left: 20px;
+				  }
+				}
+			}
+			& span {
+				font-size: 1.1em;
+			    font-weight: 300;
+			    color: #fff;
+			    text-align: right;
+			    width: 89%;
+			    padding-bottom: 10px;
+			}
+			& button {
+			    background: transparent;
+			    font-weight: 400;
+			    font-size: 1em;
+			    border: 1px solid transparent;
+			    cursor: pointer;
+			    color: #fff;
+			    transition: all .3s ease-in-out;
+			    padding: 8px 16px;
+			}
+		}
+	}
+
+	& .alert-wrap {
+		.flex(column, center, center);
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		visibility: hidden;
+		z-index: -1;
+		& .hover {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: .8;
+			background: #000;
+		}
+		& .alert-frame {
+			.flex(column, center, center);
+			transform: scale(0);
+			background-color: #fff;
+			border-radius: 3px;
+			width: 30%;
+			min-width: 300px;
+			padding: 10px 0;
+			box-shadow: 0 0 20px 2px rgba(255,255,255,0.2);
+			z-index: 3;
+			transition: transform .2s linear;
+
+			& h2 {
+				font-weight: 400;
+			}
+
+			& button {
+				.button(5px, @green-color, #fff, 1);
+				margin: 10px 0;
+			}
+		}
+		& .active {
+			transform: scale(1);
+		}
+	}
+	& .alert-active {
+		visibility: visible;
+		z-index: 199999;
+	}
+}
+
+.bid-block {
+	.flex(column, flex-start, center);
+	width: 294px;
+	height: 185px;
+	margin: 20px;
+	background: #fff;
+	color: #000;
+	border-radius: 2px;
+	box-shadow: 2px 2px 14px 2px rgba(0,0,0,.3);
+	& .bid-title {
+		width: 90%;
+		padding: 10px 0;
+		& h3 {
+			color: #000;
+			font-size: 1.1em;
+			width: 100%;
+			text-align: left;
+		}
+	}
+	& .bid-content {
+		.flex(column, center, center);
+		width: 90%;
+		padding: 10px 0;
+		border-bottom: 1px solid #fff;
+		font-size: 1em;
+		& h3 {
+			font-size: 1em;
+		}
+	}
+	& .bid-footer {
+		.flex(row, space-between, center);
+		width: 90%;
+		height: 75px;
+		padding: 10px 0;
+		font-size: .9em;
+		& .bid-more {
+			cursor: pointer;
+			transition: all .3s linear;
+		}
+	}
+}
+
+
+& .profile-wrap {
+  .flex(column, flex-start, center);
+  position: relative;
+  z-index: 100;
+
+  & img { cursor: pointer; }
+
+  & .hidden-menu {
+  	display: none;
+  }
+
+  & .profile-hidden-image {
+    display: none;
+  }
+
+  & .mobile-menu-close {
+  	display: none;
+  }
+
+  & .profile-list {
+  	.flex(column, flex-start, flex-start);
+    display: none;
+    position: absolute;
+    top: 180%;
+    left: -236px;
+    min-width: 270px;
+    height: auto;
+    padding: 15px 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 2px 2px 20px 0 rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 20px 0 rgba(0,0,0,0.2);
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: 12.5px;
+      width: 18px;
+      height: 18px;
+      border-top: 1px #ddd solid;
+      border-left: 1px #ddd solid;
+      background: #fff;
+      display: block;
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    & hr {
+      background: #eee;
+      height: 1px;
+      margin: 5px 0;
+      border: none;
+    }
+
+    & .profile-item {
+      .flex(row, flex-start, center);
+	  width: 100%;
+	  padding: 0 10%;
+	  cursor: pointer;
+      &:hover { background: lighten(@profile-wrap, 50%); }
+      & img {
+        width: 16px;
+        margin-right: 5px;
+      }
+      & .color-image {
+        display: none;
+      }
+    }
+
+    & .mobile-active {
+      display: none;
+    }
+
+    & a {
+      color: @profile-wrap;
+      text-align: left;
+      padding: 8px 0;
+      line-height: 1.5;
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+		& .sberbank-button {
+			display: flex;
+			align-items: center;
+			.button(5px, #0EB757, #fff, 1);
+			font-size: 14pt;
+			font-weight: 400;
+			width: auto;
+			border: none;
+			margin: 10px auto;
+			&:hover {
+				background: lighten(#0EB757, 5%);
+				color: #fff;
+			}
+			&:active {
+				background: darken(#0EB757, 5%);
+				transform: none;
+			}
+			& svg {
+				margin: 0 5px;
+			}
+		}
+  }
+}
+
+& .blocks-wrap {
+	.flex(column, flex-start, center);
+	flex-wrap: wrap;
+	width: 100%;
+	margin: 25px 0;
+
+	& .block-row {
+	  .flex(row, flex-start, flex-start);
+	  flex-wrap: wrap;
+	  background-color: #fff;
+	  width: 65%;
+	  border-radius: 8px;
+	  padding: 20px 10px;
+	  margin: 5px 0;
+	  cursor: pointer;
+	  transition: box-shadow .2s linear;
+	  &:hover {
+	    box-shadow: 0 3px 14px 0 rgba(0,0,0,.1);
+	  }
+
+	  & h3 {
+	  	font-weight: 500;
+	  }
+
+	  & .block-item {
+	    .flex(column, flex-start, flex-start);
+	    flex-basis: 200px;
+
+	    & span {
+	      color: #878787;
+	      font-size: 1rem;
+	      padding: 5px 0;
+	      & span { color: @black-color; }
+	    }
+
+	    & .analog-block {
+	      .flex(column , flex-start, flex-start);
+	      display: none;
+	      padding: 10px;
+	      width: 100%;
+
+	      & h2 {
+	      	font-weight: 300;
+	      }
+
+	      & table {
+	        background-color: #f5f5f5;
+	        display: block;
+	        overflow-x: scroll;
+	        min-width: 235px;
+	        border-collapse: collapse;
+	        border-radius: 5px;
+	          box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
+	        & tr {
+	          border-bottom: 1px solid #ccc;
+	          & td {
+	            width: 18%;
+	            padding: 5px 1%;
+	            text-align: center;
+	            font-size: .8em;
+	          }
+
+	          & td:first-child a {
+	            color: @green-color;
+	          }
+	        }
+	        & tr:nth-child(2n) {
+	        	background: #ececec;
+	        }
+
+	        & tr:first-child {
+	          border-bottom: none;
+	          & td {
+	            color: @black-color;
+	          }
+	        }
+	      }
+	    }
+
+	    & .active-analog {
+	      display: flex;
+	    }
+	  }
+
+	  & .analog {
+	    flex-basis: unset;
+	    width: 450px;
+	    min-width: 300px;
+	  }
+
+	  & .block-item:first-child {
+	    padding: 10px;
+	    flex-basis: 140px;
+	  }
+
+	  & button.analog-btn {
+	    .button(5px, @green-color, #fff, 12);
+	    margin: 0 10px 5px 10px;
+	    transition-property: all;
+	  }
+
+	  & .btn-wrap {
+	    .flex(row, flex-start, center);
+	    width: 100%;
+
+	    & .empty {
+	    	width: 340px;
+	    }
+
+	    & button {
+	      .button(5px, @green-color, #fff, 12);
+	      border: 1px solid @green-color;
+	      margin: 0 10px;
+	      transition-property: all;
+	    }
+	  }
+	}
+}

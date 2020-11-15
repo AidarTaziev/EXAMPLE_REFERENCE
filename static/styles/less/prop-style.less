@@ -1,0 +1,127 @@
+@import "base.less";
+
+header .right-side .content-wrap .main-row {
+  .flex(row, flex-start, flex-start);
+  flex-wrap: wrap;
+  width: @base-width;
+
+  .prop-list {
+    .flex(column, flex-start, flex-start);
+    width: 50%;
+    min-width: 300px;
+    margin-bottom: 25px;
+    margin-right: 25px;
+
+    & h1 { width: 100%; }
+
+    & .row {
+      .flex(row, flex-start, center);
+      width: 100%;
+      border-bottom: 1px solid #ededed;
+      padding: 10px 0;
+
+      & span {
+        font-size: 1rem;
+        padding: 0;
+        color: #828282;
+        text-align: left;
+        color: #fff;
+      }
+
+      & span:last-child {
+        font-weight: bold;
+        color: #fff;
+      }
+    }
+  }
+
+  .btn-wrap {
+    .flex(column, flex-start, center);
+    width: 40%;
+    min-width: 300px;
+    margin-top: 85px;
+    .price-block {
+      .flex(column, center, center);
+      width: 100%;
+      background-color: #fff;
+
+      span {
+        padding: 20px 10px;
+        text-align: center;
+        font-size: 1.2em;
+        color: #000;
+      }
+
+      & button {
+        .button(5px, @green-color, #fff, 12);
+        border: 1px solid @green-color;
+        margin-bottom: 10px;
+        font-size: .9rem;
+      }
+    }
+
+    & button {
+      .button(5px, #fff, @green-color, 12);
+      margin: 10px 0;
+      font-size: .9rem;
+    }
+
+    & .analog-block {
+      .flex(column , flex-start, flex-start);
+      opacity: 0;
+      padding: 10px;
+      width: 100%;
+      transition: opacity .3s linear;
+      overflow-x: scroll;
+
+      & table {
+        background-color: #f5f5f5;
+        border-collapse: collapse;
+        border-radius: 5px;
+          box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
+        & tr {
+          border-bottom: 1px solid #ccc;
+          & td {
+            width: 18%;
+            padding: 5px 5px;
+            text-align: center;
+          }
+
+          & td:first-child {
+            color: @green-color;
+          }
+        }
+
+        & tr:first-child {
+          font-weight: bold;
+          border-bottom: none;
+          & td {
+            color: @black-color;
+          }
+        }
+
+        & tr:nth-child(2n+1) {
+          background-color: #fff;
+        }
+      }
+    }
+
+    & .active-analog {
+      opacity: 1;
+    }
+  }
+}
+
+.alert {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 25%;
+  background: @green-color;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,.5);
+  width: 250px;
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+}

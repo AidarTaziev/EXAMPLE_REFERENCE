@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <h2>Оформление заявки</h2>
+    <span class="mark">Марка: <span>{{ shortcode }}</span></span>
+    <form action="post_polymer_order" class="filter" method="post">{% csrf_token %}
+        <input type="hidden" name="idgoods" value="{{ polymer_id }}">
+        <label class="filter-item">
+            <span>Наименование компании-заказчика (грузополучатель)</span>
+            <input type="text" name="consignee">
+        </label>
+        <label class="filter-item">
+            <span>Количество тонн</span>
+            <input type="number" name="numbers" value="1">
+        </label>
+        <label class="filter-item">
+            <span>Метод отгрузки</span>
+            <select name="idshipment_methods">
+                {% for shipment_method in shipment_methods %}
+                    <option value="{{ shipment_method.id }}">{{ shipment_method.name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label class="filter-item">
+            <span>Период отгрузки c</span>
+            <input type="date" name="shipment_from" value="2018-10-25">
+        </label>
+        <label class="filter-item">
+            <span>по</span>
+            <input type="date" name="shipment_to" value="2018-10-25">
+        </label>
+        <label class="filter-item">
+            <span>Условия доставки</span>
+            <select name="idshipment_conditions">
+                {% for shipment_condition in shipment_conditions %}
+                    <option value="{{ shipment_condition.id }}">{{ shipment_condition.name }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label class="filter-item">
+            <span>Пункт назначения (адрес)</span>
+            <input type="text" name="address">
+        </label>
+        <label class="filter-item">
+            <span>Имя</span>
+            <input type="text" name="contact_name">
+        </label>
+        <label class="filter-item">
+            <span>Телефон</span>
+            <input type="text" name="contact_phone">
+        </label>
+        <label class="filter-item">
+            <span>E-mail</span>
+            <input type="text" name="contact_email">
+        </label>
+        <label class="filter-item">
+            <span>Дополнительная информация менеджеру</span>
+            <textarea name="message"></textarea>
+        </label>
+        <label class="filter-item">
+        </label>
+        <div class="btn-wrap">
+            <input type="submit" name="send" value="Отправить" class="disabled-btn" disabled>
+        </div>
+    </form>
+    <div class="alert">
+        <span>a</span>
+    </div>
+
+{% endblock content %}
+
+{% block adding_js %}
+    <script type="text/javascript" src="{% static "js/validation.js" %}"></script>
+{% endblock adding_js %}

@@ -1,0 +1,106 @@
+// Основные шрифты сервиса
+@base-font: 'Roboto', sans-serif;
+
+//Основные цвета сервиса
+
+@alert-color: #c23616;
+@success-color: #4cd137;
+@green-color: #66ab55;
+@black-color: #424242;
+@input-bg: #fafafa;
+@header-bg: #f5f5f5;
+@profile-wrap: #6a7287;
+@base-width: 65%;
+
+html {
+	-webkit-tap-highlight-color: transparent;
+	width: 100%;
+}
+
+body {
+	font-size: 14px;
+	width: 100%;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	outline: none;
+	font-family: @base-font;
+  &::-webkit-scrollbar {
+    border-radius: 15%;
+    width: 5px;
+    height: 5px;
+    opacity: .8;
+  }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #fff;
+    opacity: .8;
+    padding: 0;
+    border-radius: 5px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #ccc;
+    opacity: .8;
+    padding: 0;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+  }
+}
+
+.flex(@dir, @content, @items) {
+  display: flex;
+  flex-direction: @dir;
+  justify-content: @content;
+  align-items: @items;
+}
+
+.button(@radius, @bgcolor, @color, @k) {
+  border: 1px solid @bgcolor;
+  border-radius: @radius;
+  background-color: @bgcolor;
+  font-size: 1em;
+  color: @color;
+  padding: 8px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: .3s;
+  transition-timing-function: linear;
+
+  &:hover {
+    border-color: @color;
+    background: @color;
+    color: @bgcolor;
+  }
+
+  &:active {
+    transform: scale(.9);
+  }
+
+}
+
+.input() {
+  border: 1px solid transparent;
+  background-color: @input-bg;
+  color: @black-color;
+	font-size: 1.2rem;
+  transition: all .3s linear;
+
+  &:focus , &:hover {
+    border-color: @green-color;
+  }
+
+}
+
+a {
+	text-decoration: none;
+	color: @black-color;
+}

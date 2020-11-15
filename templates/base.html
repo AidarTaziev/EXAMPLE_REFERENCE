@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="ru" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, user-scalable=0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,400i,500,500i,700,900" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static '/styles/css/main.css' %}">
+    <link rel="stylesheet" href="{% static '/styles/css/main_page_styles/main.css' %}">
+    <title>Справочник</title>
+</head>
+<body>
+<!-- preload screen -->
+<div class="preload-wrap">
+    <div class="hover"></div>
+    <div class="preload-content">
+        <img src="{% static 'images/logo.png' %}">
+        <svg class="spinner" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="1" stroke-miterlimit="10"></circle>
+        </svg>
+    </div>
+</div>
+{% include 'header.html' %}
+<!-- Главный контейнер -->
+<header>
+    <div class="left-side">
+        <div class="logo">
+            <img src="{% static 'images/logotype.png' %}" alt="">
+        </div>
+        <div class="features-column">
+            <div class="features-item">
+                <img src="{% static 'images/secure.png' %}" width="32px">
+                <h3>Надежность</h3>
+                <span>Вся информация собрана лично нашим технологом, и соответствует действительности</span>
+            </div>
+            <div class="features-item">
+                <img src="{% static 'images/speed.png' %}" alt="" width="32px">
+                <h3>Скорость</h3>
+                <span>Моментальное получение всей информации о полимере и его аналогах</span>
+            </div>
+            <div class="features-item">
+                <img src="{% static 'images/usability.png' %}" alt="" width="32px">
+                <h3>Удобство</h3>
+                <span>Все действия просиходят в пару кликов мыши, вместо звонков менеджеру</span>
+            </div>
+            <!--           <div class="features-item">
+            <img src="{% static 'images/sup.png' %}" alt="" width="32px">
+            <h3>Поддержка</h3>
+            <span>Постоянное обновление функциональности и своевременное устранение ошибок</span>
+          </div> -->
+            <!--               <div class="features-item">
+            <img src="{% static 'images/sale.png' %}" alt="" width="32px">
+            <h3>Низкие цены</h3>
+            <span>Начальная цена в торговых сессиях гораздо ниже рыночной</span>
+          </div> -->
+            <div class="features-item">
+                <img src="{% static 'images/time.png' %}" alt="" width="32px">
+                <h3>24/7</h3>
+                <span>Сервис работает 24 часа в сутки, 7 дней в неделю</span>
+            </div>
+        </div>
+    </div>
+    <div class="right-side">
+        <div class="hover-wrap">
+            <!-- <img src="{% static 'images/header-1.png' %}" class="hover-img"> -->
+            <div class="hover"></div>
+        </div>
+        <h1>Справочник продукции</h1>
+        <div class="content-wrap">
+            {% block content %}{% endblock content %}
+            {% include 'cookies.html' %}
+        </div>
+    </div>
+    <div class="alert-wrap" id="agreement-wrap">
+      <div class="hover"></div>
+      <div class="alert-frame">
+          <h2></h2>
+          <button id="agreement_close">OK</button>
+      </div>
+    </div>
+</header>
+{% block adding_js %}{% endblock adding_js %}
+<script type="text/javascript" src="{% static 'js/main-files/main-functions.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main-files/main-ajax.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main-page/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+django_sso_client/__init__.py
+django_sso_client/auth_methods.py
+django_sso_client/middleware.py
+django_sso_client/urls.py
+django_sso_client/views.py
+django_sso_client.egg-info/PKG-INFO
+django_sso_client.egg-info/SOURCES.txt
+django_sso_client.egg-info/dependency_links.txt
+django_sso_client.egg-info/not-zip-safe
+django_sso_client.egg-info/requires.txt
+django_sso_client.egg-info/top_level.txt

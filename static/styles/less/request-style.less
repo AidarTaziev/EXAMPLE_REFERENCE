@@ -1,0 +1,65 @@
+@import "base.less";
+
+header .right-side .content-wrap {
+  & h2 {
+    color: #fff;
+    font-weight: 300;
+    text-align: left;
+    font-size: 1.8em;
+    padding: 10px 0;
+    width: 65%;
+  }
+
+  & .mark {
+    width: @base-width;
+    font-size: 1.2em;
+    text-align: left;
+  }
+
+  & .request {
+    .flex(column, flex-start, flex-start);
+    width: @base-width;
+    min-width: 300px;
+    padding: 20px 0;
+
+    & label {
+      .flex(column, flex-start, flex-start);
+      width: 500px;
+      min-width: 100px;
+      margin: 10px 0;
+
+      & span {
+        font-size: 1em;
+        cursor: pointer;
+        padding: 5px 0;
+        text-align: left;
+      }
+
+      & input , select , textarea {
+        .input();
+        padding: 0 5%;
+        height: 45px;
+        width: 90%;
+        max-width: 90%;
+        border-radius: 3px;
+        font-size: 1em;
+      }
+
+      & input[type="submit"] {
+        .button(5px, @green-color, #fff, 16px);
+        border-color: @green-color;
+        margin: 10px 0;
+        align-self: center;
+        width: auto;
+
+
+        &.disabled-btn {
+          background-color: #f5f5f5;
+          box-shadow: none;
+          border-color: #f5f5f5;
+        }
+      }
+    }
+
+  }
+}

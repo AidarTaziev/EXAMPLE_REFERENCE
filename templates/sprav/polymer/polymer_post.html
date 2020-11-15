@@ -1,0 +1,45 @@
+<div class="block-row" id="{{ polymer.id }}">
+    <div class="block-item">
+        <h3>Марка: <a href="/polymer/{{ polymer.id }}">{{ polymer.shortcode }}</a></h3>
+    </div>
+    <div class="block-item">
+        <span>Тип: <span>{{ polymer.subtype__type__name }}</span></span>
+        <span>Подтип: <span>{{ polymer.subtype__name }}</span></span>
+        {% if polymer.plant is not None %}
+            <span>Производитель: <span>{{ polymer.plant }}</span></span>
+        {% endif %}
+        {% if polymer.ptr %}
+            <span>ПТР: <span>{{ polymer.ptr }}</span></span>
+        {% endif %}
+        {% if polymer.density %}
+            <span>Плотность: <span>{{ polymer.density }}</span></span>
+        {% endif %}
+        <span>Цвет: <span>{{ polymer.color__name }}</span></span>
+        {% if polymer.copolymer__name is not None %}
+            <span>Сополимер: <span>{{ polymer.copolymer__name }}</span></span>
+        {% endif %}
+        {% if polymer.t_vika %}
+            <span>Температура Вика: <span>{{ polymer.t_vika }}</span></span>
+        {% endif %}
+    </div>
+    <div class="block-item analog"> <!-- Скрывать или показывать при наличии аналагов -->
+        <button type="button" class="analog-btn">ПОКАЗАТЬ АНАЛОГИ</button>
+        <div class="analog-block">
+            <table>
+                {#                    <tr>#}
+                {#                        <td>Марка</td>#}
+                {#                        <td>Подтип</td>#}
+                {#                        <td>Производитель</td>#}
+                {#                        <td>ПТР</td>#}
+                {#                        <td>Плотность</td>#}
+                {#                    </tr>#}
+            </table>
+        </div>
+    </div>
+    <div class="btn-wrap">
+        <div class="empty"></div>
+        <a href="polymer/order/{{ polymer.id }}">
+            <button type="button">ОСТАВИТЬ ЗАЯВКУ</button>
+        </a>
+    </div>
+</div>
